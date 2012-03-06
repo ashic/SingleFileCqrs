@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            vm = employeeViewModel();
+            ko.applyBindings(vm);
+            vm.FetchEmployees();
+        });
+    </script>
+}
+<script type="text/html" id='employeeTemplate'>
+        <li><a href="" data-bind='text:Name, click:function(){vm.SelectEmployee(EmployeeId);}'></a></li>
+</script>
+<h2>
+    All Employees
+</h2>
+<div id="all-employees" data-bind='visible:ShowList'>
+    <ul data-bind='template:{name:"employeeTemplate", foreach:Items}'>
+    </ul>
+</div>
+<hr />
+<h2>
+    Add Employee</h2>
+<div id="'addForm">
+    <div class="validation-summary-errors" data-bind='html:NotificationMessage'>
+    </div>
+    <table>
+        <tr>
+            <td>
+                Name:
+            </td>
+            <td>
+                <input type="text" data-bind='value:Name' />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Address:
+            </td>
+            <td>
+                <input type="text" data-bind='value:Address' />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" data-bind='click:AddEmployee' value="save" />
+            </td>
+        </tr>
+    </table>
+</div>
+<hr/>
+<h2>Change Employee Name</h2>
+<div id="editForm" data-bind='visible:Selected()'>
+    <div class="validation-summary-errors" data-bind='html:EditNotificationMessage'>
+    </div>
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" data-bind='value:Selected().Name'/></td>
+        </tr>
+        <tr>
+            <td>Address: </td>
+            <td><span data-bind='text:Selected().Address()'/></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="button" data-bind='click:ChangeEmployeeName' value="save"/></td>
+        </tr>
+    </table>
+</div>
+<div data-bind='visible : !Selected()'>
+    Please select an employee to edit their name.
+</div>

@@ -1,0 +1,9 @@
+This is a very simple CQRS sample I've used in a few talks. There's a Framework.cs class that has an entire cqrs "framework" in it.
+If you want to use it in an app, simply add the file and add a NuGet reference to RavenDb. I've used the embedded version here.
+The framework is pretty basic but does event sourcing and has built in concurrency checking. 
+The application code is garbage, nothing has tests but there is a point - notice how everything is independent and can be improved to use whatever flashy greatness you want.
+No industry standard message queue, no IoC container - yet we have flexible extensible code.
+
+You can literally take the single file framework and start coding domain logic for almost any application. Once you've got something stable
+and know you need a feature (caching, sharding etc.), you can literally plug that in. Less up front set up - more up front code enabling us to fail faster.
+Enjoy!
